@@ -1677,30 +1677,49 @@
                   />
                 </div>
                 <div class="title-area">
-                  <h4 class="title">Nevine Acotanza</h4>
-                  <span>Chief Operating Officer</span>
+                  <h4 class="title">Md. Billal Hossain Mozumder</h4>
+                  <span>Software Engineer</span>
                 </div>
                 <div class="description">
                   <p>
-                    I am available for freelance work. Connect with me via and
-                    call in to my account.
+                    <strong>Thank you</strong> sincerely for your kind visit. It
+                    meant a lot to me that you took the time to come by. Should
+                    you need any further information, please do not hesitate to
+                    contact me.
                   </p>
                   <span class="phone"
-                    >Phone: <a href="tel:01941043264">+01234567890</a></span
+                    >Phone:
+                    <a href="tel:+8801689605510">+8801689605510</a></span
                   >
                   <span class="mail"
                     >Email:
-                    <a href="mailto:admin@example.com"
-                      >admin@example.com</a
+                    <a href="mailto:mozumder0204@gmail.com"
+                      >mozumder0204@gmail.com</a
                     ></span
                   >
                 </div>
                 <div class="social-area">
                   <div class="name">FIND WITH ME</div>
                   <div class="social-icone">
-                    <a href="#"><i data-feather="facebook"></i></a>
-                    <a href="#"><i data-feather="linkedin"></i></a>
-                    <a href="#"><i data-feather="instagram"></i></a>
+                    <a href="http://www.facebook.com/nobel0204" target="_blank"
+                      ><i data-feather="facebook"></i
+                    ></a>
+                    <a
+                      href="http://www.linkedin.com/in/mozumder0204/"
+                      target="_blank"
+                      ><i data-feather="linkedin"></i
+                    ></a>
+                    <a href="http://github.com/mozumder0204" target="_blank"
+                      ><i data-feather="github"></i
+                    ></a>
+                    <a
+                      href="http://www.instagram.com/nobel.mozumder"
+                      target="_blank"
+                      ><i data-feather="instagram"></i
+                    ></a>
+                    <a href="http://twitter.com/mozumder0204" target="_blank"
+                      ><i data-feather="twitter"></i
+                    ></a>
                   </div>
                 </div>
               </div>
@@ -1712,9 +1731,18 @@
                     class="rnt-contact-form rwt-dynamic-form row"
                     id="contact-form"
                     method="POST"
-                    action="mail.php"
+                    action="#"
+                    method="post"
+                    onsubmit="sendEmail();"
+                    role="form"
                   >
-                    <div class="col-lg-6">
+                    <p id="sendmessage" class="success-msg">
+                      Your message has been sent. Thank you!
+                    </p>
+                    <p id="errormessage" class="error-msg">
+                      Your message has not been sent. Try Again!
+                    </p>
+                    <div class="col-lg-12">
                       <div class="form-group">
                         <label for="contact-name">Your Name</label>
                         <input
@@ -1726,7 +1754,7 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                       <div class="form-group">
                         <label for="contact-phone">Phone Number</label>
                         <input
@@ -1736,7 +1764,7 @@
                           type="text"
                         />
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-lg-12">
                       <div class="form-group">
@@ -1752,7 +1780,7 @@
 
                     <div class="col-lg-12">
                       <div class="form-group">
-                        <label for="subject">subject</label>
+                        <label for="subject">Subject</label>
                         <input
                           class="form-control form-control-sm"
                           id="subject"
@@ -1780,6 +1808,7 @@
                         type="submit"
                         id="submit"
                         class="rn-btn"
+                        onclick="sendEmail(event)"
                       >
                         <span>SEND MESSAGE</span>
                         <i data-feather="arrow-right"></i>
@@ -2205,12 +2234,8 @@
               </div>
 
               <p class="description mt--30">
-                © 2021. All rights reserved by
-                <a
-                  target="_blank"
-                  href="https://themeforest.net/user/rainbow-themes/portfolio"
-                  >Rainbow-Themes.</a
-                >
+                © 2022 <strong>Billal Hossain</strong>. All rights reserved by
+                <a href="#">Billal Hossain</a>
               </p>
             </div>
           </div>
@@ -2231,5 +2256,36 @@
     <script src="assets/js/vendor/particles.js"></script>
     <!-- main JS -->
     <script src="assets/js/main.js"></script>
+    <script src="./assets/js/contactform/contactform.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script>
+      function sendEmail(event) {
+        event.preventDefault();
+        Email.send({
+          SecureToken: '59252bc9-40db-417d-bee9-dc6f39938ce9',
+          name: document.getElementById('contact-name').value,
+          Host: 'smtp.google.com',
+          PORT: 25,
+          Username: 'nobel4g@gmail.com',
+          Password: 'Password',
+          To: 'mozumder0204@gmail.com',
+          From: document.getElementById('contact-email').value,
+          Subject: document.getElementById('subject').value,
+          Body: document.getElementById('contact-message').value,
+        }).then(function (response) {
+          if (response == 'OK') {
+            $('#sendmessage').addClass('show');
+            $('#errormessage').removeClass('show');
+            $('.contactForm').find('input, textarea').val('');
+          } else {
+            $('#sendmessage').removeClass('show');
+            $('#errormessage').addClass('show');
+            $('#errormessage').html(msg);
+            throw new Error('Error: ' + response.statusText);
+          }
+        });
+      }
+    </script>
   </body>
 </html>
