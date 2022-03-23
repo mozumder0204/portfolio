@@ -2234,6 +2234,8 @@
               </div>
 
               <p class="description mt--30">
+                This site has been visited <span id="visits"></span> times.
+                <br />
                 © 2022 <strong>Billal Hossain</strong>. All rights reserved by
                 <a href="#">Billal Hossain</a>
               </p>
@@ -2287,5 +2289,11 @@
         });
       }
     </script>
+    <script>
+      function cb(response) {
+          document.getElementById('visits').innerText = response.value;
+      }
+      </script>
+      <script async src="https://api.countapi.xyz/hit/billalhossain.vercel.app/visits?callback=cb"></script>
   </body>
 </html>
